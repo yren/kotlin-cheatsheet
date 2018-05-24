@@ -270,3 +270,29 @@ fun run(f: () -> Unit)
 ```
 
 ### 集合
+* 大部分和 java 相同，添加了一些函数式操作，代码更简洁
+* 遍历, 过滤, 映射, 排序, 折叠, 分组, 归类
+
+```
+fun collectionCase() {
+    val list = listOf("Apple", "Amazon", "Ali", "Facebook")
+    
+    //遍历
+    list.forEach {println(it)}
+    
+    //过滤 返回条件为 true 的
+    var short = list.filter { it.length < 6 }
+    
+    //把列表元素映射为另一种元素, [5, 6, 3, 8]
+    var lenList = list.map {it.length}
+    
+    // 按某条件进行排序
+    var orderList = list.sortBy {it.length}
+    // 折叠
+    var joint = list.fold("", {partial, item -> if })
+    // 分组
+    var (first, second) = list.partition {it.length < 6}
+    // 归类，返回一个 map, {5=[apple], 6=[Amazon]}
+    var bucket = list.groupBy {it.length}
+}
+```
