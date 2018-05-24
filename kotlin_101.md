@@ -92,3 +92,94 @@ fun foo(name: String) = name.toUpperCase()
 * 与 java 不同， kotlin 中函数是和 class 一个级别的，`fun` 可以不在任何类中。函数可以赋给变量。 在 kotlin 中函数式一等公民。
 
 ### 类和对象
+
+* 用 `class` 声明类型， 用分号 `:` 来继承父类或实现接口， `不用 new` 来创建对象. 例子:
+
+```
+class Person {
+    var name: String
+    var age: Int
+}
+```
+ 
+* 空类可以省略 `{}` ， 例子:
+
+```
+class Person
+```
+
+* 创建对象, 例子:
+
+```
+var someone = Person()
+```
+
+### Primary constructor
+
+* 构造方法，有所谓的 primary constructor, 可以直接写在类名后面, 例子:
+
+```
+class Person constructor(name: String)
+
+// constructor 可以省略
+class Person(name: String)
+```
+
+* primary constructor 的初始化工作在 initializer block, 例子:
+
+```
+class Person(name: String) {
+    var firstName = name
+    init {
+        println("fist init block print ${name}")
+    }
+}
+```
+
+* 如果声明的属性在 primary constructor 中有赋值, 可以写为:
+
+```
+class Person(var name: String, var age: Int)
+
+// 等价于
+
+class Person(name: String, age: Int) {
+    var name = name
+    var age = age
+}
+```
+
+* 如果 primary constructor 前面有属性声明，或 annotation 的话， `constructor` 关键字不能省略.
+
+```
+class Person public @Inect constructor(var name: String)
+```
+
+### Secondary constructor
+* 除了 primary constructor 外, 还可以声明其他 constructor, 即 secondary constructor
+
+```
+class Person(var name: String) {
+    constructor(name: String, parent: Person): this(name) {
+        parent.addChild(this)
+    }
+}
+```
+
+* secondary constructor 需要 delegate 到 primary constructor 上, 就是 primary 会在 secondary 之前执行。 init block 是在 primary constructor 中执行的。 如果没有显示的 primary constructor 声明，编译器会生成默认的 primary constructor, 并默认 delegate 到 secondary constructor 上面。例子:
+
+```
+class Person {
+    init {
+        println("init block")
+    }
+    
+    constructor(i: Int) {
+        println("second constructor")
+    }
+}
+
+fun main(args: Array<String>) {
+    val c = Person(1)
+}
+```
