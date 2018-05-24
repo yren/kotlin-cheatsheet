@@ -37,4 +37,29 @@ java -jar hello.jar
 
 ### 变量
 * `var` 声明变量， `val` 声明常量
-* kotlin 是`静态强类型语言`
+* kotlin 是`静态强类型语言` （每个变量在编译时需要知道类型), 变量声明需要带上类型。格式 `var str: String`, 如果声明时直接赋值, 编译器会根据 context 推到出类型, 可以不加类型。
+
+例子：
+```
+var str: String
+val i: Int
+// str 类型由编译器推导, 可以不加类型
+var str = "Hello kotlin"
+```
+
+### 语句和表达式
+* 表达式有值，可以放在变量赋值的右边。 语句没有值，不能放在赋值右边。
+
+### 注释
+
+* 与 java 相同， 单行注释 `//` ， 多行注释 `/*   */`
+
+### 函数
+* 用 `fun` 定义函数, 格式 `fun 函数名(参数): 返回值 {函数体}`
+
+例子：
+```
+fun foo(name: String): Int {
+    return name.length()
+}
+```
