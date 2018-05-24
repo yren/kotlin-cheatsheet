@@ -1,4 +1,4 @@
-# kotlin introduce
+# kotlin introduce 101
 ## source
 * http://toughcoder.net/blog/2018/05/17/introduction-to-kotlin-programming-language
 
@@ -63,3 +63,32 @@ fun foo(name: String): Int {
     return name.length()
 }
 ```
+
+* 参数可以有默认值，调用函数值可以加上参数名字, 增加可读性。
+
+例子:
+
+```
+fun foo(name: String, num: Int = 42, flag: Boolean = false) {
+    //
+}
+```
+函数调用可以指定参数名字增加可读性
+
+```
+foo("a")
+foo(name = "b", number = 1)
+```
+
+* 如果函数只有一个表达式, 且有返回值, 可以不用 {}, 直接把他放在函数后面，例子:
+
+```
+fun foo(name: String): String = name.toUpperCase()
+
+// 可以去掉返回类型，类型可以推导得到
+fun foo(name: String) = name.toUpperCase()
+```
+
+* 与 java 不同， kotlin 中函数是和 class 一个级别的，`fun` 可以不在任何类中。函数可以赋给变量。 在 kotlin 中函数式一等公民。
+
+### 类和对象
