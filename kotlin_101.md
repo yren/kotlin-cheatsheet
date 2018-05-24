@@ -183,3 +183,65 @@ fun main(args: Array<String>) {
     val c = Person(1)
 }
 ```
+
+### 属性和方法
+* kotlin 为属性生成默认的 getter 和 setter
+```
+class Person(var name: String, var age: Int)
+
+val p = Person("tom", 3)
+
+p.getName()
+p.setAge(5)
+```
+
+### 定义类方法
+* 和普通 `fun` 声明一样, 只是放在类里面
+
+```
+class Person(var name: String, var age: Int) {
+    fun report() = "My name is $name, age $age"
+}
+```
+
+* 覆写父类的方法，加上 `override` 
+
+```
+class Dog(var name: String): Animal {
+    override fun yell() = "Yell from $name"
+}
+```
+
+### 访问权限
+* 与 java 类似，分为 `public`, `protected`, `private`, `internal`, 前 3 个与 java 相同, 只是默认值不同, java 默认  package scope, kotlin 默认 public scope.  `internal` 是 `module` 内部可见, module 定义和 package 不同， module 是一组编译在一起的 kotlin 文件， 简单理解 module 比 package 范围大。
+
+* kotlin 中类默认不可继承, 即 final class, 如果需要继承需要声明是加上 `open` 
+
+### String
+* 与 java 中类似， kotlin 中可以用 `$` 将变量嵌入字符串中
+
+```
+var msg = "hello"
+println("we got message $msg")
+```
+
+### lambda 表达式
+* 高阶函数的概念, 高阶函数即将别的函数作为参数或返回值的函数. lambda 表达式就是为高阶函数方便使用而生
+
+* 简单的讲, lambda 表达式即没有名字的函数。例如 `{a,b -> c}`
+
+```
+var sum = {x: Int, y: Int -> x + y}
+```
+
+* 当 lambda 是最后一个参数，传给函数时，可以把 lambda 表达式写在参数外面
+
+```
+var product = item.fold(1) {acc, e -> acc * e}
+```
+
+* 当 lambda 是唯一参数，参数括号可以省略
+
+```
+run { println("hello, kotlin") }
+```
