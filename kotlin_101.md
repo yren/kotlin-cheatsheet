@@ -296,3 +296,7 @@ fun collectionCase() {
     var bucket = list.groupBy {it.length}
 }
 ```
+
+### null 处理
+* kotlin 加入了 Nullable 类型，为了减少 NullPointerException, 原理： 声明类型的时候明确告诉编译器，变量是否可为 null, 如果可以就能赋 null 给变量，使用变量是必须检查是否为 null, 如果声明为不为 null 变量，就不能付 null 给变量。
+
