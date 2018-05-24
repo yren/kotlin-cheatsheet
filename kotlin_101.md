@@ -245,3 +245,28 @@ var product = item.fold(1) {acc, e -> acc * e}
 ```
 run { println("hello, kotlin") }
 ```
+
+* 当 lambda 只有一个参数，参数可以省略
+
+```
+eval {x * x}
+```
+
+### 函数类型
+* kotlin 中函数也是变量， 它也有类型。 形式 `(a, b) -> c` 括号内是参数类型, c 是返回类型
+
+```
+var sum: (Int, Int) -> Int = {x, y -> x + y}
+var square: (Int) -> Int = {x -> x * x}
+```
+
+* 声明高阶函数时有时需要函数类型
+
+```
+fun walk(f: (Int) -> Int)
+
+// Unit 相当于 void, 即无返回值
+fun run(f: () -> Unit)
+```
+
+### 集合
