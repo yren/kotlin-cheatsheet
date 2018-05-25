@@ -330,5 +330,5 @@ println(len ?: -1)
 * 强制取值 `!!`, 得到正常值，或者 null 时抛 NullPointerException
 
 ```
-val len = danger!!.length // get length or NullPointerException
+val len = danger!!.length // get length or NullPointerExceptiona
 ```
