@@ -19,7 +19,7 @@ fun main(args: Array<String>) {
 kotlinc hello.kt -include-runtime -d hello.jar
 
 ## -h 查看 kotlinc 帮助
-kotlinc -h 
+kotlinc -h
 ```
 
 * 运行 hello.jar, 编译得到了标准的 java jar 文件。
@@ -101,7 +101,7 @@ class Person {
     var age: Int
 }
 ```
- 
+
 * 空类可以省略 `{}` ， 例子:
 
 ```
@@ -173,7 +173,7 @@ class Person {
     init {
         println("init block")
     }
-    
+
     constructor(i: Int) {
         println("second constructor")
     }
@@ -204,7 +204,7 @@ class Person(var name: String, var age: Int) {
 }
 ```
 
-* 覆写父类的方法，加上 `override` 
+* 覆写父类的方法，加上 `override`
 
 ```
 class Dog(var name: String): Animal {
@@ -215,7 +215,7 @@ class Dog(var name: String): Animal {
 ### 访问权限
 * 与 java 类似，分为 `public`, `protected`, `private`, `internal`, 前 3 个与 java 相同, 只是默认值不同, java 默认  package scope, kotlin 默认 public scope.  `internal` 是 `module` 内部可见, module 定义和 package 不同， module 是一组编译在一起的 kotlin 文件， 简单理解 module 比 package 范围大。
 
-* kotlin 中类默认不可继承, 即 final class, 如果需要继承需要声明是加上 `open` 
+* kotlin 中类默认不可继承, 即 final class, 如果需要继承需要声明是加上 `open`
 
 ### String
 * 与 java 中类似， kotlin 中可以用 `$` 将变量嵌入字符串中
@@ -276,16 +276,16 @@ fun run(f: () -> Unit)
 ```
 fun collectionCase() {
     val list = listOf("Apple", "Amazon", "Ali", "Facebook")
-    
+
     //遍历
     list.forEach {println(it)}
-    
+
     //过滤 返回条件为 true 的
     var short = list.filter { it.length < 6 }
-    
+
     //把列表元素映射为另一种元素, [5, 6, 3, 8]
     var lenList = list.map {it.length}
-    
+
     // 按某条件进行排序
     var orderList = list.sortBy {it.length}
     // 折叠
@@ -300,3 +300,35 @@ fun collectionCase() {
 ### null 处理
 * kotlin 加入了 Nullable 类型，为了减少 NullPointerException, 原理： 声明类型的时候明确告诉编译器，变量是否可为 null, 如果可以就能赋 null 给变量，使用变量是必须检查是否为 null, 如果声明为不为 null 变量，就不能付 null 给变量。
 
+* 默认的变量声明不可以为 null
+```
+var safe: String
+```
+
+* 声明可以为 null 的变量，需要在类型后加问号 `?`
+```
+var danger: String?
+danger = null // OKay
+```
+
+* nullable 变量不能直接使用，必须检查是否为null
+
+Safe call
+```
+// 返回值是一个Int? 类型
+val len = danger?.length
+```
+
+* 如果是 null 返回默认值 `?:`
+
+```
+val len = danger?.length
+// len == null 时返回 -1
+println(len ?: -1)
+```
+
+* 强制取值 `!!`, 得到正常值，或者 null 时抛 NullPointerException
+
+```
+val len = danger!!.length // get length or NullPointerException
+```
